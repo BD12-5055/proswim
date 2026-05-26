@@ -1,4 +1,5 @@
 // ---------- LANGUAGE AUTO-DETECT (first visit only) ----------
+/*
 (function () {
   const KEY = "lang-pref";
   const stored = localStorage.getItem(KEY);
@@ -26,6 +27,7 @@
   if (stored === "en" && !onEnglishPage) window.location.replace("/en/");
   if (stored === "nl" && onEnglishPage) window.location.replace("/");
 })();
+*/
 // ---------- INTRO LOADER ----------
 const loader = document.getElementById("loader");
 const count = document.getElementById("count");
