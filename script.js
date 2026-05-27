@@ -41,7 +41,7 @@ const tick = setInterval(() => {
     setTimeout(() => loader.classList.add("is-gone"), 1500);
   }
   count.textContent = n;
-}, 60);
+}, 55);
 
 // ---------- CUSTOM CURSOR ----------
 const cursor = document.getElementById("cursor");

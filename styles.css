@@ -159,12 +159,12 @@ img { max-width: 100%; display: block; }
   left: 0;
   /* 1. Stretch the wave to be twice as wide as the screen */
   width: 200%; 
-  height: 60px;
+  height: 80px;
   color: var(--fg);
   opacity: .04;
   
   /* 2. Apply a linear, infinite animation */
-  animation: rollingWave 12s linear infinite;
+  animation: rollingWave 11s linear infinite;
 
   will-change: transform;
   transform: translateZ(0);
