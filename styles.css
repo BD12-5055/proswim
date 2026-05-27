@@ -86,10 +86,13 @@ img { max-width: 100%; display: block; }
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 1.5rem 2.5rem;
-  color: #fff;
+  color: var(--fg);
 }
 @media (hover: hover) and (min-width: 769px) {
-  .nav { mix-blend-mode: difference; }
+  .nav {
+  mix-blend-mode: difference;
+  color: #fff;             /* white + difference = auto-invert */
+  }
 }
 .nav__logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; }
 .nav__logo span { color: #fff; opacity: .5; }
