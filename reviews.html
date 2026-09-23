@@ -74,28 +74,27 @@
     <div class="cursor" id="cursor"></div>
 
     <header class="nav">
-      <div class="nav__menu">
-        <a href="index.html" class="nav__logo" aria-label="Axel Vandevelde Home">
+        <div class="nav__menu">
+          <a href="index.html" class="nav__logo" aria-label="Axel Vandevelde Home">
             <img src="logo.svg" alt="Axel Vandevelde Logo" />
-        </a>
-        <nav class="nav__links">
-          <a href="over-ons.html">Over Ons</a>
-          <a href="aanbod.html">Aanbod</a>
-          <!--<a href="#results">Palmares</a>-->
-          <!--<a href="aanbod.html">Tarieven</a>-->
-          <a href="reviews.html">Reviews</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-      </div>
-      <div class="nav__right">
-        <!--<div class="lang">
-          <a href="/" class="is-active" aria-current="page">NL</a>
-          <span>/</span>
-          <a href="/en/">EN</a>
-        </div>-->
-        <a href="contact.html" class="nav__cta">Contacteer mij →</a>
-      </div>
-    </header>
+          </a>
+          <nav class="nav__links" id="navLinks">
+            <a href="over-ons.html">Over Ons</a>
+            <a href="aanbod.html">Aanbod</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+        </div>
+        <div class="nav__right">
+          <a href="contact.html" class="nav__cta">Contacteer mij →</a>
+          
+          <!-- Mobile Menu Toggle Button -->
+          <button class="nav__toggle" id="navToggle" aria-label="Toggle Navigation">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </header>
 
     <section class="quote" id="quote">
         <div class="section-head reveal">

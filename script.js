@@ -231,3 +231,25 @@ if (quoteTrack) {
   });
 }
 
+// ---------- MOBILE MENU TOGGLE ----------
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener("click", () => {
+    navToggle.classList.toggle("is-active");
+    navLinks.classList.toggle("is-open");
+    
+    // Prevent background scrolling when menu is active
+    document.body.style.overflow = navLinks.classList.contains("is-open") ? "hidden" : "";
+  });
+
+  // Close menu when a navigation link is clicked
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navToggle.classList.remove("is-active");
+      navLinks.classList.remove("is-open");
+      document.body.style.overflow = "";
+    });
+  });
+}
