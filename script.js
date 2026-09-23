@@ -32,6 +32,20 @@
 // ---------- WAVE LOADER ----------
 (function () {
   const loader = document.getElementById("loader");
+
+  // The inline script in <head> adds "skip-intro" to <html> (before this
+  // page ever paints) whenever the animated intro shouldn't play: any
+  // page other than the homepage, or a homepage visit that already
+  // played it earlier this browser session. CSS already hides #loader
+  // in that case, so here we just reveal the hero content (if present)
+  // immediately and skip building/animating the wave entirely.
+  if (document.documentElement.classList.contains("skip-intro")) {
+    document.querySelector(".hero__title")?.classList.add("is-ready");
+    document.querySelector(".hero__foot")?.classList.add("is-ready");
+    document.querySelector(".hero__accent")?.classList.add("is-ready");
+    return;
+  }
+
   const svg = document.getElementById("loaderSvg");
   const wavePath = document.getElementById("loaderWavePath");
   const clipLeftPath = document.getElementById("clipLeftPath");
@@ -186,26 +200,15 @@ const io = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 
-// ---------- QUOTE CAROUSEL (INFINITE LOOP + INTERACTIVITY) ----------
+// ---------- QUOTE CAROUSEL (SINGLE ROW, EXPAND ON HOVER/CLICK) ----------
 const quoteTrack = document.getElementById("quoteTrack");
 
 if (quoteTrack) {
-  const group = quoteTrack.querySelector(".quote__track-group");
-  
-  // Clone the group twice (3 total). This guarantees the track is wide 
-  // enough to loop seamlessly even on ultra-wide desktop monitors.
-  const clone1 = group.cloneNode(true);
-  const clone2 = group.cloneNode(true);
-  
-  // Accessibility: Hide the duplicates from screen readers
-  clone1.setAttribute("aria-hidden", "true");
-  clone2.setAttribute("aria-hidden", "true");
-  
-  quoteTrack.appendChild(clone1);
-  quoteTrack.appendChild(clone2);
-
-  // Now that clones are in the DOM, query all cards to attach click events
-  const quoteItems = document.querySelectorAll(".quote__item");
+  // Each review shows once — no cloning, no auto-scroll. The row is
+  // sized to its content and centered in the section (see styles.css),
+  // and hover/focus expansion is handled entirely by CSS. This just
+  // adds click-to-toggle so the expanded state also works on touch.
+  const quoteItems = quoteTrack.querySelectorAll(".quote__item");
 
   quoteItems.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -227,3 +230,4 @@ if (quoteTrack) {
     quoteItems.forEach((item) => item.classList.remove("is-active"));
   });
 }
+

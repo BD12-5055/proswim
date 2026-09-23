@@ -64,6 +64,12 @@ img { max-width: 100%; display: block; }
 .loader.is-gone {
   display: none;
 }
+
+/* Set synchronously (before first paint) by the inline script in <head>
+   on pages/visits that should skip the animated intro entirely. */
+html.skip-intro .loader {
+  display: none;
+}
 /* ------------- CURSOR ------------- */
 .cursor {
   position: fixed; top: 0; left: 0; width: 18px; height: 18px;
@@ -90,8 +96,21 @@ img { max-width: 100%; display: block; }
   color: #fff;             /* white + difference = auto-invert */
   }
 }
-.nav__logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; }
-.nav__logo span { color: #fff; opacity: .5; }
+.nav__menu { display: flex; align-items: center; gap: 2.5rem; }
+.nav__logo {
+  display: flex;
+  align-items: center;
+  /* Matches the visual scale of the previous ~1.4rem font height */
+  height: 3.2rem; 
+}
+
+.nav__logo img {
+  height: 100%;
+  width: auto;
+  display: block;
+  /* Ensures SVG behaves identically to white text under mix-blend-mode: difference */
+  filter: brightness(0) invert(1);
+}
 .nav__links { display: flex; gap: 2rem; font-size: .9rem; }
 .nav__links a { position: relative; }
 .nav__links a::after {
@@ -343,10 +362,16 @@ section { padding: 8rem 2.5rem; }
 .quote__carousel-wrapper {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
   padding: 2.5rem 0;
   
-  /* Fixed 80px fade adjusts dynamically to container width */
+  /* Only kicks in if the row is wider than the viewport and has to
+     scroll (e.g. small screens); has no visible effect once everything
+     fits, since nothing sits in that outer band to fade. */
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
 }
@@ -354,27 +379,11 @@ section { padding: 8rem 2.5rem; }
 .quote__track {
   display: flex;
   width: max-content;
-  /* Adjust the 25s time to speed up or slow down */
-  animation: carouselRotate 25s linear infinite;
-  will-change: transform;
 }
 
 .quote__track-group {
   display: flex;
   gap: 2rem;
-  padding-right: 2rem; /* Creates the seamless gap between the cloned groups */
-}
-
-/* Pause rotation whenever hovering or focusing */
-.quote__carousel-wrapper:hover .quote__track,
-.quote__track:focus-within {
-  animation-play-state: paused;
-}
-
-/* Shift exactly 1 out of the 3 groups for an infinite seamless loop */
-@keyframes carouselRotate {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-33.333333%); }
 }
 
 /* Review Cards */
