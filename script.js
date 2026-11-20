@@ -153,6 +153,7 @@
    * 0.2s delay + 1.5s draw + 0.15s pause ≈ 1.85s
    */
   /* ---- SPLIT ---- */
+  /*
   setTimeout(() => {
     loader.classList.add("is-splitting");
     setTimeout(() => {
@@ -164,6 +165,7 @@
       document.querySelector(".hero__accent")?.classList.add("is-ready");
     }, 1150);
   }, 1850);
+  */
 })();
 
 // ---------- CUSTOM CURSOR ----------
